@@ -1,0 +1,18 @@
+{
+  "Emulator (CNN)": {
+    "rmse_1day": 0.004346459136907221,
+    "valid_time_days": 50.0
+  },
+  "Persistence": {
+    "rmse_1day": 1.235774775203779,
+    "valid_time_days": 1.0
+  },
+  "Euler physics": {
+    "rmse_1day": 0.14872636627557645,
+    "valid_time_days": 11.25
+  },
+  "Climatology": {
+    "rmse_1day": 1.8810894601762704,
+    "valid_time_days": 0.0
+  }
+}

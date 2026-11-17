@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "l96emu"
+version = "0.1.0"
+description = "A small convolutional neural network that emulates the Lorenz-96 model"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Leon von Detten" }]
+dependencies = ["numpy>=1.24", "torch>=2.2", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.4"]
+
+[project.scripts]
+l96-train = "l96emu.train:main"
+l96-evaluate = "l96emu.evaluate:main"
+l96-plot = "l96emu.extra_plot:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: longer-running statistical checks"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
