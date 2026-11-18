@@ -30,7 +30,7 @@ from mpl_toolkits.mplot3d.art3d import Line3DCollection  # noqa: E402
 from l96emu.lorenz96 import generate_trajectories  # noqa: E402
 from l96emu.metrics import MTU_IN_DAYS  # noqa: E402
 
-DEFAULT_DT = 0.05  # used only for runs saved before dt was stored with the data
+DEFAULT_DT = 0.05
 
 
 # ----------------------------------------------------------------------------- data
@@ -172,7 +172,7 @@ def plot_receptive_field(out: Path, n_layers: int = 4, kernel: int = 5, k_vars: 
 
 
 def plot_network_graph(
-    weights: list[np.ndarray], out: Path, keep: float = 0.06, title_note: str = ""
+    weights: list[np.ndarray], out: Path, keep: float = 0.05, title_note: str = ""
 ) -> None:
     """Channels as nodes, one column per layer; an edge = one input channel -> output channel.
 

@@ -47,6 +47,7 @@ atmosphere, so the time step `dt = 0.05` is about 6 hours.
 pip install -e ".[dev]"          # or first: pip install torch --index-url https://download.pytorch.org/whl/cpu
 l96-train --out runs/default     # about a few minutes on a laptop CPU
 l96-evaluate --run runs/default --out figures
+l96-plot --run runs/default --out figures       # optional: 3D views and network structure
 pytest
 ```
 
@@ -54,14 +55,17 @@ All hyperparameters are command-line options, see `l96-train --help`.
 
 ## Results
 
-<!-- Fill in after running l96-evaluate. The numbers are printed and saved to figures/metrics.json. -->
 
 | Forecast       | RMSE at 1 day | Valid time |
 |----------------|---------------|------------|
-| Emulator (CNN) |               |            |
-| Euler physics  |               |            |
-| Persistence    |               |            |
-| Climatology    |               |            |
+| Emulator (CNN) | 0.015         | 12.5 days  |
+| Euler physics  | 1.01          | 1.75 days  |
+| Persistence    | 3.31          | 0.5 days   |
+| Climatology    | 3.65          | 0 days     |
+
+Climatology has a valid time of 0 by construction: its error equals the
+climatological standard deviation from the start, which is already above the
+threshold.
 
 ![RMSE against lead time](figures/rmse_vs_lead.png)
 
@@ -77,6 +81,7 @@ src/l96emu/
   metrics.py    autoregressive rollout, RMSE by lead time, valid time
   train.py      training script (l96-train)
   evaluate.py   evaluation and figures (l96-evaluate)
+  extra_plot.py 3D views of the attractor, receptive field, kernels, network graph (l96-plot)
 tests/          unit tests, including physics checks and an end-to-end smoke test
 ```
 
@@ -87,14 +92,6 @@ fourth order, that the advection term conserves energy, that the network is
 translation equivariant and that the full train and evaluate pipeline runs.
 GitHub Actions runs linting (ruff) and the test suite on every push.
 
-## Possible extensions
-
-- Train on multi-step rollouts instead of single steps to reduce error growth.
-- Learn a larger time step than the one used for the data.
-- Compare the CNN with a fully connected network of similar size.
-- Add stochasticity or train an ensemble to represent forecast uncertainty.
-- Use the two-scale Lorenz-96 system and learn only the unresolved small-scale
-  effects (a parametrisation) instead of the full dynamics.
 
 ## References
 
